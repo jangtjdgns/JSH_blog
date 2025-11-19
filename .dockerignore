@@ -1,0 +1,11 @@
+target/
+.git
+.gitignore
+*.log
+*.class
+*.jar
+*.war
+*.iml
+.idea/
+.metadata/
+.DS_Store

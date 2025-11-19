@@ -7,7 +7,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Meow</title>
+	<title>JSH_BLOG</title>
 	<!-- <link rel="icon" href="/resources/images/favicon/cat-pow.ico" type="image/x-icon"> -->
 	<%@ include file="../common/head.jsp"%>
 </head>

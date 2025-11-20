@@ -1,18 +1,21 @@
-FROM eclipse-temurin:17-jdk-alpine
+# 1. 빌드 단계
+FROM maven:3.9.3-eclipse-temurin-17 AS build
 
 WORKDIR /app
-
-COPY mvnw .
-COPY .mvn/ .mvn
 COPY pom.xml .
 COPY src ./src
 
-RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+# 2. 런타임 단계
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+COPY --from=build /app/target/jangtjdgns-0.0.1-SNAPSHOT.jar app.jar
+
+# Spring Boot 포트 변경
+ENV SERVER_PORT=8000
 
 EXPOSE 8000
 
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]

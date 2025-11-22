@@ -11,6 +11,8 @@
 		<version>3.2.5</version>
 		<relativePath/>
 	</parent>
+	
+	<packaging>war</packaging>
 
 	<groupId>com.JSHblog</groupId>
 	<artifactId>jangtjdgns</artifactId>

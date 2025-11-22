@@ -10,7 +10,6 @@ public class JangtjdgnsApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        // War 배포 시 실행될 클래스 지정
         return builder.sources(JangtjdgnsApplication.class);
     }
 

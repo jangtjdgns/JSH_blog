@@ -3,18 +3,13 @@ FROM maven:3.9.4-eclipse-temurin-17 AS build
 WORKDIR /app
 COPY pom.xml ./
 COPY src ./src
-RUN mvn clean install -DskipTests
+RUN mvn clean package -DskipTests
 
-# 2. 런타임 단계 (External Tomcat)
-FROM tomcat:10.1-jdk17
+# 2. 런타임 단계 (Spring Boot embedded)
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=build /app/target/jangtjdgns-0.0.1-SNAPSHOT.war app.war
 
-# 기본 webapps 제거 (충돌 방지)
-RUN rm -rf /usr/local/tomcat/webapps/*
-
-# WAR → ROOT로 배포
-COPY --from=build /app/target/jangtjdgns-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
-
-# Tomcat 기본 포트 사용
+# Render의 PORT 환경변수 사용
 EXPOSE 8080
-
-CMD ["catalina.sh", "run"]
+ENTRYPOINT ["java", "-jar", "app.war"]

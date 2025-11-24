@@ -1,6 +1,6 @@
 # 자체 환경변수 사용
 server:
-  port: ${PORT:8000}
+  port: ${PORT:8080}
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

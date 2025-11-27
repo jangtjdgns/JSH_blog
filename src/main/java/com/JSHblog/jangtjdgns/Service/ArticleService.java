@@ -16,8 +16,8 @@ public class ArticleService {
 		this.articleDao = articleDao;
 	}
 	
-	public List<Article> getArticles() {
-		return articleDao.getArticles();
+	public List<Article> getArticles(int searchType, String searchKeyword) {
+		return articleDao.getArticles(searchType, searchKeyword);
 	}
 	
 	public Article getArticleById(int id) {
